@@ -1,0 +1,15 @@
+version: '3.5'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nextjsdocker
+    volumes:
+      - .:/app
+      - /app/node_modules
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.nextjs.entrypoints=web
+      - traefik.http.routers.nextjs.rule=Host(`next.mydao.fr`)
