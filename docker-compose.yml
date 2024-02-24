@@ -4,6 +4,8 @@ services:
   nextapp:
     container_name: nextapp
     image: mydao/nextapp
+    networks:
+      - traefik_default
     build: .
     ports:
       - "3000:3000"
