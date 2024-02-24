@@ -6,8 +6,12 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: nextjs
-    ports:
-      - "3000:3000"
     volumes:
       - .:/app
       -  /app/node_modules
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dockernext.entrypoints=web, websecure"
+      - "traefik.http.routers.dockernext.rule=Host(`next.mydao.fr`)"
+      - "traefik.http.routers.dockernext.tls=true"
+      - "traefik.http.routers.dockernext.tls.certresolver=prodution"
