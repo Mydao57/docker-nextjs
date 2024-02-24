@@ -1,15 +1,13 @@
-version: '3.5'
-
+version: '3.8'
 services:
-  app:
+  dockernext:
     build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: nextjsdocker
+      context: ./
+      target: runner
     volumes:
       - .:/app
-      - /app/node_modules
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.nextjs.entrypoints=web
-      - traefik.http.routers.nextjs.rule=Host(`next.mydao.fr`)
+    command: npm run dev
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
