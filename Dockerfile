@@ -1,15 +1,21 @@
+# Here we're using alpine to get a small image
 FROM node:18-alpine
 
+# Loading our port as ENV
+ENV PORT 3000
+
+# Creating the app folder and setting up as WORKDIR
+RUN mkdir /app
 WORKDIR /app
 
-COPY package.json ./
-
+# Getting package.json and others to install all the required Node packages
+COPY package*.json /app/
 RUN npm install
 
-COPY . .
-
+# Copying and building our app to production
+COPY . /app/
 RUN npm run build
 
-COPY .next ./.next
-
-CMD ["npm", "run", "dev"]
+# Finally, exposing and running our app inside our container
+EXPOSE 3000
+CMD "npm" "start"
