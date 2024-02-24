@@ -1,13 +1,13 @@
-version: '3.8'
+version: "3.5"
+
 services:
-  dockernext:
+  app:
     build:
-      context: ./
-      target: runner
-    volumes:
-      - .:/app
-    command: npm run dev
+      context: .
+      dockerfile: Dockerfile
+    container_name: nextjs
     ports:
       - "3000:3000"
-    environment:
-      NODE_ENV: development
+    volumes:
+      - .:/app
+      -  /app/node_modules
